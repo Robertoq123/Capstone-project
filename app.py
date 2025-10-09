@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+import time
 
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/project_stocks'
@@ -43,6 +44,9 @@ class Portfolio(db.Model):
     quantity = db.Column(db.Integer, default=0)
     stock = db.relationship('StockInventory')
 
+class Markethours(db.Model):
+    start_time = db.Column(db.Integer)
+    end_time = db.Column(db.Integer)
 
 with app.app_context():
     db.create_all()
@@ -56,9 +60,8 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
-        if 'user_id' in session:
-            return redirect(url_for('profile'))
-
+    if 'user_id' in session:
+        return redirect(url_for('profile'))
 
 def admin_required(f):
     @wraps(f)
@@ -70,10 +73,23 @@ def admin_required(f):
             return redirect(url_for('profile'))
         return f(*args, **kwargs)
     return decorated
-        if 'user_id' in session:
-            return redirect(url_for('profile'))
-
-
+    if 'user_id' in session:
+        return redirect(url_for('profile'))
+    if 'start_time' == 8:00:
+        start_time = time.time()
+        markethours = Markethours(start_time=start_time)
+        db.session.add(markethours)
+        return redirect(url_for('login'))
+    if 'end_time' not 5:00:
+        end_time = time.time()
+        markethours = Markethours(end_time=end_time)
+        db.session.add(markethours)
+        return redirect(url_for('login'))
+    if 'end_time' == 5:00:
+        end_time = time.time()
+        markethours = Markethours(end_time=end_time)
+        db.session.add(markethours)
+        return redirect(url_for('home'))
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -114,13 +130,14 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             session['user_id'] = user.id
             return redirect(url_for('profile'))
-        
-        if not username not password
+
+        if not username or password:
            flash("Invalid credentials.")
            return redirect(url_for('login'))
 
-     return render_template('login.html')
+    return render_template('login.html')
 
+        
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
@@ -261,5 +278,4 @@ def trade(ticker):
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)
