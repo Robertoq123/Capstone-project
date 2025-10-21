@@ -48,6 +48,9 @@ class Markethours(db.Model):
     start_time = db.Column(db.Integer)
     end_time = db.Column(db.Integer)
 
+class hours(db.Model):
+    minutes = db.Column(db.Integer)
+
 with app.app_context():
     db.create_all()
 
@@ -90,6 +93,96 @@ def admin_required(f):
         markethours = Markethours(end_time=end_time)
         db.session.add(markethours)
         return redirect(url_for('home'))
+    if 'minutes' == 30:
+        minutes = Minutes(minutes=minutes)
+        id = 1
+        db.session.remove(stock)
+        stock = 'Apple Inc.'
+        db.session.remove(stock)
+        company id = 1001
+        db.session.remove(company id)
+        administrator id = 5001
+        db.session.remove(administrator id)
+        id = 2
+        db.session.add(id)
+        stock 2 = 'AAPL.'
+        db.session.add(stock 2)
+        company id = 1003
+        db.session.add(company id)
+        administrator id = 120
+        db.session.add(administrator id)
+        return redirect(url_for('profile'))
+    if 'minutes' == 30:
+        minutes = Minutes(minutes=minutes)
+        id = 2
+        db.session.remove(id)
+        id = 3 
+        db.session.add(id)
+        stock 2 = 'AAPL.'
+        db.session.remove(stock)
+        stock 3 = 'Tesla Inc.'
+        db.session.add(stock 3)
+        company id = 'Bannana Inc'
+        db.session.add(company id)
+        administrator id = 120
+        db.session.remove(administrator id)
+        administrator id = 5002
+        db.session.add(administrator id)
+        return redirect(url_for('profile'))
+    if 'minutes' == 30:
+        minutes = Minutes(minutes=minutes)
+        id = 3
+        db.session.remove(id)
+        id = 4
+        db.session.add(id)
+        stock 3 = 'Tesla Inc.'
+        db.session.remove(stock 3)
+        stock 4 = 'Game stonks'
+        db.session.add(stock 4)
+        company id = 'Bannana Inc'
+        db.session.remove(company_id)
+        company id = 'STNK'
+        db.session.add(company_id)
+        administrator id = 5002
+        db.session.remove(administrator_id)
+        administrator id = 998
+        db.session.add(administrator_id)
+    if 'minutes' == 30:
+        minutes = Minutes(minutes=minutes)
+        id = 4
+        db.session.remove(id)
+        id = 5
+        db.session.add(id)
+        stock 4 = 'Game stonks'
+        db.session.remove(stock 5)
+        stock 5 = 'Realty co'
+        db.session.add(stock 5)
+        company id = 'STNK'
+        db.session.remove(company_id)
+        company id = 'REAL'
+        db.session.add(company id)
+        administrator id = 998
+        db.session.remove(administrator_id)
+        administrator id = 997
+        db.session.add(administrator_id)
+    if 'minutes' == 30:
+        minutes = Minutes(minutes=minutes)
+        id = 5
+        db.session.remove(id)
+        id = 6
+        db.session.add(id)
+        stock 5 = 'Realty co'
+        db.session.remove(stock 5)
+        stock 6 = 'Oranges INC'
+        db.session.add(stock 6)
+        company id = 'REAL'
+        db.session.remove(company id)
+        company id = 'ORNG'
+        db.session.add(company id)
+        administrator id = 997
+        db.session.remove(administrator id)
+        administrator id = 0
+        db.session.add(administrator id)
 @app.route('/')
 def home():
     return render_template('home.html')
